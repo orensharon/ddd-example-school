@@ -1,6 +1,10 @@
 package com.sharono.example.ddd.school.domain.class_room;
 
 import com.sharono.example.ddd.school.domain.Aggregate;
+import com.sharono.example.ddd.school.domain.class_room.event.ClassRoomClosedEvent;
+import com.sharono.example.ddd.school.domain.class_room.event.ClassRoomClosingEvent;
+import com.sharono.example.ddd.school.domain.class_room.event.ClassRoomOpenedEvent;
+import com.sharono.example.ddd.school.domain.class_room.event.ClassRoomOpeningEvent;
 import com.sharono.example.ddd.school.domain.student.Student;
 import com.sharono.example.ddd.school.domain.teacher.Teacher;
 
@@ -34,7 +38,7 @@ public class ClassRoom extends Aggregate {
             throw new RuntimeException("Illegal command - already opening");
         }
         this.state = OPENING;
-        // TODO: raise event
+        this.enqueue(new ClassRoomOpeningEvent(this.id));
     }
 
     public void close() {
@@ -45,20 +49,20 @@ public class ClassRoom extends Aggregate {
             throw new RuntimeException("Illegal command - already closing");
         }
         this.state = CLOSING;
-        // TODO: raise event
+        this.enqueue(new ClassRoomClosingEvent(this.id));
     }
 
     public void opened() {
         if (this.isOpening()) {
             this.state = OPENED;
-            // TODO: raise event
+            this.enqueue(new ClassRoomOpenedEvent(this.id));
         }
     }
 
     public void closed() {
         if (this.isClosing()) {
             this.state = CLOSED;
-            // TODO: raise event
+            this.enqueue(new ClassRoomClosedEvent(this.id));
         }
     }
 
