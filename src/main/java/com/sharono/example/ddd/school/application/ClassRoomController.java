@@ -1,46 +1,33 @@
 package com.sharono.example.ddd.school.application;
 
-import com.sharono.example.ddd.school.domain.class_room.ClassRoom;
-import rx.Completable;
-import rx.Observable;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import rx.schedulers.Schedulers;
+import java.util.concurrent.Executor;
 
 public class ClassRoomController {
 
-    private final List<ClassRoom> classRooms;
+    private final Executor executor;
 
-    public ClassRoomController(List<ClassRoom> classRooms) {
-        if (classRooms == null) {
+    private final ClassRoomService classRoomService;
+
+    public ClassRoomController(Executor executor, ClassRoomService service) {
+        if (executor == null || service == null) {
             throw new NullPointerException();
         }
-        this.classRooms = classRooms;
+        this.executor = executor;
+        this.classRoomService = service;
     }
 
     public void open(int classRoomId) {
-        ClassRoom classRoom = this.classRooms.get(classRoomId);
-        if (classRoom.isClosing() || classRoom.isOpened()) {
-            return;
-        }
-        if (classRoom.isClosed()) {
-            classRoom.open();
-        }
-        Completable
-                .fromObservable(Observable.timer(2, TimeUnit.SECONDS))
+        this.classRoomService.open(classRoomId)
+                .observeOn(Schedulers.from(this.executor))
+                .doOnCompleted(() -> this.classRoomService.opened(classRoomId))
                 .subscribe();
     }
 
     public void close(int classRoomId) {
-        ClassRoom classRoom = this.classRooms.get(classRoomId);
-        if (classRoom.isOpening() || classRoom.isClosed()) {
-            return;
-        }
-        if (classRoom.isOpened()) {
-            classRoom.close();
-        }
-        Completable
-                .fromObservable(Observable.timer(2, TimeUnit.SECONDS))
+        this.classRoomService.close(classRoomId)
+                .observeOn(Schedulers.from(this.executor))
+                .doOnCompleted(() -> this.classRoomService.closed(classRoomId))
                 .subscribe();
     }
 }
