@@ -12,10 +12,8 @@ public interface School {
 
     interface StudentState {
         int CHECKED_OUT = 0;
-        int CHECKING_OUT = 0;
-        int CHECKING_IN = 0;
-        int CHECKED_IN = 1;
-        int EXEMPTED = 2;
-        int MISSING = 3;
+        int CHECKING_IN = 1;
+        int CHECKED_IN = 2;
+        int CHECKING_OUT = 3;
     }
 }

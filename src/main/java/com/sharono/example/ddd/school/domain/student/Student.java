@@ -3,11 +3,15 @@ package com.sharono.example.ddd.school.domain.student;
 import com.sharono.example.ddd.school.School;
 import com.sharono.example.ddd.school.domain.Aggregate;
 import com.sharono.example.ddd.school.domain.student.event.CheckedInEvent;
+import com.sharono.example.ddd.school.domain.student.event.CheckedOutEvent;
+import com.sharono.example.ddd.school.domain.student.event.CheckingInEvent;
+import com.sharono.example.ddd.school.domain.student.event.CheckingOutEvent;
 
 import static com.sharono.example.ddd.school.School.StudentState.*;
 
 public class Student extends Aggregate {
 
+    private final int id;
     private final String name;
     private final double age;
     private final String phoneNumber;
@@ -15,7 +19,7 @@ public class Student extends Aggregate {
 
     private int state;
 
-    public Student(String name, double age, String phoneNumber, String picture, int state) {
+    public Student(int id ,String name, double age, String phoneNumber, String picture, int state) {
         if (name == null || phoneNumber == null || picture == null) {
             throw new NullPointerException();
         }
@@ -25,6 +29,7 @@ public class Student extends Aggregate {
         if (name.trim().equals("")) {
             throw new IllegalArgumentException(String.format("Illegal student name: %s", name));
         }
+        this.id = id;
         this.name = name;
         this.age = age;
         this.phoneNumber = phoneNumber;
@@ -33,60 +38,33 @@ public class Student extends Aggregate {
     }
 
     public void checkIn() {
-        if (this.state == CHECKED_IN) {
-            throw new RuntimeException("Illegal action: check-in. student already checked in");
+        if (this.state != CHECKED_OUT) {
+            throw new NullPointerException("Illegal action");
         }
-        if (this.state == EXEMPTED) {
-            throw new RuntimeException("Illegal action: check-in. student exempted");
-        }
-        if (this.state == MISSING) {
-            throw new RuntimeException("Illegal action: check-in. student missing");
-        }
-        this.state = CHECKED_IN;
-        // TODO: raise event - student checked in
+        this.state = CHECKING_IN;
+        this.enqueue(new CheckingInEvent(this.id));
     }
 
     public void checkOut() {
-        if (this.state == CHECKED_OUT) {
-            throw new RuntimeException("Illegal action: check-out. student already checked out");
+        if (this.state != CHECKED_IN) {
+            throw new RuntimeException("Illegal action");
         }
-        if (this.state == EXEMPTED) {
-            throw new RuntimeException("Illegal action: check-out. student exempted");
-        }
-        if (this.state == MISSING) {
-            throw new RuntimeException("Illegal action: check-out. student is missing");
-        }
-        // Only if checked in
-        this.state = CHECKED_OUT;
-        // TODO: raise event - student checked out
+        this.state = CHECKING_OUT;
+        this.enqueue(new CheckingOutEvent(this.id));
     }
 
-    public void exempt() {
-        if (this.state == EXEMPTED) {
-            throw new RuntimeException("Illegal action: exempt. student already exempted");
+    public void checkedIn() {
+        if (this.state != CHECKED_IN) {
+            this.state = CHECKED_IN;
+            this.enqueue(new CheckedInEvent(this.id));
         }
-        if (this.state == CHECKED_IN) {
-            throw new RuntimeException("Illegal action: exempt. student checked-in");
-        }
-        if (this.state == MISSING) {
-            throw new RuntimeException("Illegal action: exempt. student missing");
-        }
-        this.state = EXEMPTED;
-        // TODO: raise event - student exempted
     }
 
-    public void missing() {
-        if (this.state == MISSING) {
-            throw new RuntimeException("Illegal action: missing. student already missing");
+    public void checkedOut() {
+        if (this.state != CHECKED_OUT) {
+            this.state = CHECKED_OUT;
+            this.enqueue(new CheckedOutEvent(this.id));
         }
-        if (this.state == CHECKED_IN) {
-            throw new RuntimeException("Illegal action: missing. student checked-in");
-        }
-        if (this.state == EXEMPTED) {
-            throw new RuntimeException("Illegal action: missing. student exempted");
-        }
-        this.state = MISSING;
-        // TODO: raise event - student missing
     }
 
     public String getName() {

@@ -31,22 +31,16 @@ public class ClassRoom extends Aggregate {
     }
 
     public void open() {
-        if (this.state == OPENED) {
-            throw new RuntimeException("Illegal command - already opened");
-        }
-        if (this.state == OPENING) {
-            throw new RuntimeException("Illegal command - already opening");
+        if (!this.isClosed()) {
+            throw new RuntimeException("Illegal action");
         }
         this.state = OPENING;
         this.enqueue(new ClassRoomOpeningEvent(this.id));
     }
 
     public void close() {
-        if (this.state == CLOSED) {
-            throw new RuntimeException("Illegal command - already closed");
-        }
-        if (this.state == CLOSING) {
-            throw new RuntimeException("Illegal command - already closing");
+        if (!this.isOpened()) {
+            throw new RuntimeException("Illegal action");
         }
         this.state = CLOSING;
         this.enqueue(new ClassRoomClosingEvent(this.id));

@@ -5,18 +5,12 @@ import com.sharono.example.ddd.school.util.eda.framework.AbstractEvent;
 public class CheckedInEvent extends AbstractEvent {
 
     private final int studentId;
-    private final int classRoomId;
 
-    public CheckedInEvent(int studentId, int classRoomId) {
+    public CheckedInEvent(int studentId) {
         this.studentId = studentId;
-        this.classRoomId = classRoomId;
     }
 
     public int getStudentId() {
         return studentId;
-    }
-
-    public int getClassRoomId() {
-        return classRoomId;
     }
 }
