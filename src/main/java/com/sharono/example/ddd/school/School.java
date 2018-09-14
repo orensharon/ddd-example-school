@@ -10,7 +10,7 @@ public interface School {
     }
 
     interface StudentState {
-        int UNKNOWN = 0;
+        int MISSING = 0;
         int CHECKED_OUT = 1;
         int CHECKED_IN = 1;
         int EXEMPTED = 2;

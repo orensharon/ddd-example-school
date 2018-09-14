@@ -64,6 +64,20 @@ public class Student {
         // TODO: raise event - student exempted
     }
 
+    public void missing() {
+        if (this.state == MISSING) {
+            throw new RuntimeException("Illegal action. student already missing");
+        }
+        if (this.state == EXEMPTED) {
+            throw new RuntimeException("Illegal action. student exempted");
+        }
+        if (this.state == CHECKED_OUT) {
+            throw new RuntimeException("Illegal action. student checked out");
+        }
+        this.state = MISSING;
+        // TODO: raise event - student missing
+    }
+
     public String getName() {
         return name;
     }
