@@ -1,4 +1,4 @@
-package com.sharono.example.ddd.school.domain;
+package com.sharono.example.ddd.school.domain.teacher;
 
 public class Teacher {
 

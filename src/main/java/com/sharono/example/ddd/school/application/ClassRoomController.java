@@ -1,6 +1,6 @@
 package com.sharono.example.ddd.school.application;
 
-import com.sharono.example.ddd.school.domain.ClassRoom;
+import com.sharono.example.ddd.school.domain.class_room.ClassRoom;
 import rx.Completable;
 import rx.Observable;
 

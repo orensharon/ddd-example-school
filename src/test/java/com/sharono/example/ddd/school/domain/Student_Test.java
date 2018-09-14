@@ -1,5 +1,6 @@
 package com.sharono.example.ddd.school.domain;
 
+import com.sharono.example.ddd.school.domain.student.Student;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;

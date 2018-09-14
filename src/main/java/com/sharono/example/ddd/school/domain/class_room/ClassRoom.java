@@ -1,4 +1,8 @@
-package com.sharono.example.ddd.school.domain;
+package com.sharono.example.ddd.school.domain.class_room;
+
+import com.sharono.example.ddd.school.domain.Aggregate;
+import com.sharono.example.ddd.school.domain.student.Student;
+import com.sharono.example.ddd.school.domain.teacher.Teacher;
 
 import java.util.List;
 

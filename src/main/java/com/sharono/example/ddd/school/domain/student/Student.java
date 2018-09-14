@@ -1,6 +1,7 @@
-package com.sharono.example.ddd.school.domain;
+package com.sharono.example.ddd.school.domain.student;
 
 import com.sharono.example.ddd.school.School;
+import com.sharono.example.ddd.school.domain.Aggregate;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import static com.sharono.example.ddd.school.School.StudentState.*;

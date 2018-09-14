@@ -1,5 +1,8 @@
 package com.sharono.example.ddd.school.domain;
 
+import com.sharono.example.ddd.school.domain.class_room.ClassRoom;
+import com.sharono.example.ddd.school.domain.student.Student;
+import com.sharono.example.ddd.school.domain.teacher.Teacher;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
