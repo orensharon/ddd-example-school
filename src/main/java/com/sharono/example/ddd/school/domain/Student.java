@@ -5,7 +5,7 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import static com.sharono.example.ddd.school.School.StudentState.*;
 
-public class Student {
+public class Student extends Aggregate {
 
     private final String name;
     private final double age;

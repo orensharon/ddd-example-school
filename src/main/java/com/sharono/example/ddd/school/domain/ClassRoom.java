@@ -4,7 +4,7 @@ import java.util.List;
 
 import static com.sharono.example.ddd.school.School.ClassRoomState.*;
 
-public class ClassRoom {
+public class ClassRoom extends Aggregate {
 
     private final int id;
     private final List<Student> students;
