@@ -5,8 +5,9 @@ public interface School {
 
     interface ClassRoomState {
         int CLOSED = 0;
-        int OPENED = 1;
-        String[] N = {"Closed", "Opened"};
+        int OPENING = 1;
+        int OPENED = 2;
+        int CLOSING = 3;
     }
 
     interface StudentState {
@@ -14,6 +15,5 @@ public interface School {
         int CHECKED_IN = 1;
         int EXEMPTED = 2;
         int MISSING = 3;
-        String[] N = {"Unknown", "Checked-Out", "Checked-In", "Exempted", "Idle"};
     }
 }

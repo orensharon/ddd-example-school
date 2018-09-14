@@ -2,8 +2,7 @@ package com.sharono.example.ddd.school.domain;
 
 import java.util.List;
 
-import static com.sharono.example.ddd.school.School.ClassRoomState.CLOSED;
-import static com.sharono.example.ddd.school.School.ClassRoomState.OPENED;
+import static com.sharono.example.ddd.school.School.ClassRoomState.*;
 
 public class ClassRoom {
 
@@ -27,7 +26,10 @@ public class ClassRoom {
         if (this.state == OPENED) {
             throw new RuntimeException("Illegal command - already opened");
         }
-        this.state = OPENED;
+        if (this.state == OPENING) {
+            throw new RuntimeException("Illegal command - already opening");
+        }
+        this.state = OPENING;
         // TODO: raise event
     }
 
@@ -35,8 +37,25 @@ public class ClassRoom {
         if (this.state == CLOSED) {
             throw new RuntimeException("Illegal command - already closed");
         }
-        this.state = CLOSED;
+        if (this.state == CLOSING) {
+            throw new RuntimeException("Illegal command - already closing");
+        }
+        this.state = CLOSING;
         // TODO: raise event
+    }
+
+    public void opened() {
+        if (this.isOpening()) {
+            this.state = OPENED;
+            // TODO: raise event
+        }
+    }
+
+    public void closed() {
+        if (this.isClosing()) {
+            this.state = CLOSED;
+            // TODO: raise event
+        }
     }
 
     public int getId() {
@@ -55,7 +74,15 @@ public class ClassRoom {
         return this.state == OPENED;
     }
 
+    public boolean isOpening() {
+        return this.state == OPENING;
+    }
+
     public boolean isClosed() {
         return this.state == CLOSED;
+    }
+
+    public boolean isClosing() {
+        return this.state == CLOSING;
     }
 }
