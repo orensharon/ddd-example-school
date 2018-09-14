@@ -7,6 +7,12 @@ public class Teacher {
     private final String picture;
 
     public Teacher(String name, String phoneNumber, String picture) {
+        if (name == null || phoneNumber == null || picture == null) {
+            throw new NullPointerException();
+        }
+        if (name.trim().equals("")) {
+            throw new IllegalArgumentException(String.format("Illegal teacher name: %s", name));
+        }
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.picture = picture;

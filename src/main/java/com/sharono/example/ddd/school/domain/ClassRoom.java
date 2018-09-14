@@ -9,6 +9,9 @@ public class ClassRoom {
     private final Teacher teacher;
 
     public ClassRoom(int id, List<Student> students, Teacher teacher) {
+        if (students == null || teacher == null) {
+            throw new NullPointerException();
+        }
         this.id = id;
         this.students = students;
         this.teacher = teacher;

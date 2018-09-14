@@ -12,6 +12,15 @@ public class School {
     private final List<Grade> grades;
 
     public School(int id, String name, String address, Teacher director, List<Grade> grades) {
+        if (director == null || grades == null || name == null || address == null) {
+            throw new NullPointerException();
+        }
+        if (name.trim().equals("")) {
+            throw new IllegalArgumentException(String.format("Illegal school name: %s", name));
+        }
+        if (address.trim().equals("")) {
+            throw new IllegalArgumentException(String.format("Illegal school address: %s", address));
+        }
         this.id = id;
         this.name = name;
         this.address = address;
