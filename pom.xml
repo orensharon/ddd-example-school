@@ -9,10 +9,17 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <rx.version>1.3.8</rx.version>
         <junit.version>4.7</junit.version>
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.reactivex/rxjava -->
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>${rx.version}</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
