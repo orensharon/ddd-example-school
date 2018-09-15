@@ -1,12 +1,12 @@
-package com.sharono.example.ddd.school.domain.class_room.event;
+package com.sharono.example.ddd.school.domain.school.event;
 
 import com.sharono.example.ddd.school.util.eda.framework.AbstractEvent;
 
-public class ClassRoomOpenedEvent extends AbstractEvent {
+public class SchoolClosingEvent extends AbstractEvent {
 
     private final int classRoomId;
 
-    public ClassRoomOpenedEvent(int classRoomId) {
+    public SchoolClosingEvent(int classRoomId) {
         this.classRoomId = classRoomId;
     }
 

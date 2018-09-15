@@ -3,7 +3,7 @@ package com.sharono.example.ddd.school;
 public interface School {
     double MIN_STUDENT_AGE = 5;
 
-    interface ClassRoomState {
+    interface SchoolState {
         int CLOSED = 0;
         int OPENING = 1;
         int OPENED = 2;

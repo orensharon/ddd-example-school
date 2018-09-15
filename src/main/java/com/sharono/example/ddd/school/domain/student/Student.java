@@ -86,4 +86,8 @@ public class Student extends Aggregate {
     public int getState() {
         return state;
     }
+
+    public int getId() {
+        return id;
+    }
 }

@@ -1,0 +1,24 @@
+{
+  "id": 0,
+  "state": 2,
+  "classes": [
+    {
+      "teacher": {
+        "id": 0,
+        "name": "teacher",
+        "phoneNumber": "222-222-222",
+        "pictureUrl": "http://"
+      },
+      "students": [
+        {
+          "id": 0,
+          "state:": 0,
+          "name": "student-0",
+          "age": 6,
+          "phoneNumber": "111-11-1111-111",
+          "pictureUrl": "http://"
+        }
+      ]
+    }
+  ]
+}
